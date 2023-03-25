@@ -1,4 +1,5 @@
 from django.contrib.auth.models import User
+from django.core.validators import MinValueValidator, MaxValueValidator
 from django.db import models
 
 
@@ -20,6 +21,6 @@ class Review(models.Model):
     )
 
     review_grade = models.PositiveSmallIntegerField(
-        max_length=1,
+        validators=(MinValueValidator(0), MaxValueValidator(5)),
         verbose_name='Оценка'
     )

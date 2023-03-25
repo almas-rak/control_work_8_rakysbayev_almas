@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} {{ product.product_name }} {% endblock title %}
+{% block content %}
+<div class="container"></div>
+    <div class="card detail-card-custum mb-3 col-10">
+        <div class="row g-0">
+                <div class="card-body">
+                    <img src="{{ product.product_image.url }}" width='250' height='250'>
+                    <div class="">
+                        <h3 class="card-title">{{product.product_name}}</h3>
+                        <a href="{% url 'update_product' product.pk %}"><img src="{% static 'icon/pen.png' %}"
+                            style="width:25px; height:20px; margin: 10px;"></a>
+                        <a href="#"><img src="{% static 'icon/remove.png' %}"
+                            style="width:25px; height:20px; margin: 10px;"></a>
+                    </div>
+                    <p class="card-text">Категория: {{product.product_category}}</p>
+                    {% if not delete %}
+                        <p class="card-text">Описание: <br> {{ product.product_description }}</p>
+                    {%endif%}
+                    {% if delete %}
+                    {% include 'partial/confirm_delete.html' %}
+                    {%endif%}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+{% endblock content %}
