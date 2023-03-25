@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% block title %}Home{% endblock title %}
+{% block menu %}
+    <li class="nav-item">
+        <a class="nav-link active" href="{% url 'create_product' %}">Добавить продукт</a>
+    </li>
+{% endblock menu %}
+{% block content %}
+
+<table class="table table-striped">
+    <thead>
+    <tr>
+        <th scope="col" class="sortable column-summary">
+            <div class="text">Название</div>
+        </th>
+        <th scope="col">
+            <div class="text">Категория</div>
+        </th>
+        <th scope="col">
+            <div class="text">Картинка</div>
+        </th>
+    </tr>
+    </thead>
+    <tbody>
+
+    {% for product in products %}
+        <tr>
+            <td class="field-summary">
+                <a href="{% url 'detail_product' product.pk %}">{{product.product_name}}</a>
+            </td>
+            <td class="field-status nowrap">{{product.product_category}}</td>
+            <td class="field-type nowrap">
+                <img src="{{product.product_image.url}}" width="100" height="100">
+            </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+{% if is_paginated %}
+        {% include 'partial/pagination.html' %}
+        {% endif %}
+{% endblock content %}
